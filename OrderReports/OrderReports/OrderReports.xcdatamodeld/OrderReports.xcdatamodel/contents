@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Customer" representedClassName="Customer" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="customerOrder" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Order" inverseName="orderCustomer" inverseEntity="Order" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="LineOrder" representedClassName="LineOrder" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="lineOrder" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Order" inverseName="orderLine" inverseEntity="Order" syncable="YES"/>
+        <relationship name="lineProduct" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Product" inverseName="productLine" inverseEntity="Product" syncable="YES"/>
+    </entity>
+    <entity name="Order" representedClassName="Order" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="orderCustomer" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Customer" inverseName="customerOrder" inverseEntity="Customer" syncable="YES"/>
+        <relationship name="orderLine" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LineOrder" inverseName="lineOrder" inverseEntity="LineOrder" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="productLine" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LineOrder" inverseName="lineProduct" inverseEntity="LineOrder" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Customer" positionX="-335" positionY="206" width="128" height="120"/>
+        <element name="LineOrder" positionX="-605" positionY="12" width="128" height="105"/>
+        <element name="Order" positionX="-396" positionY="17" width="128" height="120"/>
+        <element name="Product" positionX="-614" positionY="261" width="128" height="90"/>
+    </elements>
+</model>
